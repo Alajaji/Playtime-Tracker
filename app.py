@@ -6,15 +6,13 @@ from sqlalchemy import exc, func, desc
 import json
 from flask_cors import CORS
 
-from models import db_drop_and_create_all, setup_db, Playtime, Genre, Player
+from models import setup_db, Playtime, Genre, Player
 from auth import AuthError, requires_auth
 
 
-# this will drop all records and start db from scratch. Change to False to prevent dropping.
-dropDB = False
 
 app = Flask(__name__)
-setup_db(app, dropDB)
+setup_db(app)
 CORS(app)
 
 
@@ -285,4 +283,4 @@ def auth_error(auth):
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    app.run()

@@ -4,26 +4,19 @@ from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
 import json
 
-database_name = "playtime_tracker"
-database_path = "postgres://{}/{}".format(
-    'postgres:1234@localhost:5432', database_name)
-
+database_path = os.environ['DATABASE_URL']
+#database_path = "postgres://ogznxosuhvjafk:888bbc10b9802394e44cc90e91abc0f4b36b8b1231de14c467e549b9f3293978@ec2-34-202-5-87.compute-1.amazonaws.com:5432/dcnhem2ft9nqof"
 db = SQLAlchemy()
 
-
-def setup_db(app, dropDB, database_path=database_path):
+'''
+setup_db(app)
+    binds a flask application and a SQLAlchemy service
+'''
+def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
-    if dropDB:
-        db.drop_all()
-
-    db.create_all()
-
-
-def db_drop_and_create_all():
-    db.drop_all()
     db.create_all()
 
 

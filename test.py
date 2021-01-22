@@ -18,14 +18,6 @@ def client():
     yield client
 
 
-def test_get_all_playtimes(client):
-    header = {
-        'Authorization': 'Bearer {}'.format(JWT_SUPER_USER)
-    }
-    response = client.get('/playtimes', headers=header)
-    assert response.status_code == 200
-
-
 def test_post_playtime(client):
     body = {
         "game": "Overwatch",
@@ -60,6 +52,13 @@ def test_get_most_playtime(client):
         'Authorization': 'Bearer {}'.format(JWT_SUPER_USER)
     }
     response = client.get('/most-playtime'.format(PLAYER_ID), headers=header)
+    
+    assert response.status_code == 200
+def test_get_all_playtimes(client):
+    header = {
+        'Authorization': 'Bearer {}'.format(JWT_SUPER_USER)
+    }
+    response = client.get('/playtimes', headers=header)
     assert response.status_code == 200
 
 
