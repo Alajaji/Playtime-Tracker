@@ -45,7 +45,7 @@ def get_player_id(name):
 
 """
 POST /playtime
-    Creates new record in Gamplay table.
+    Creates new record in Playtime table.
     If player does not exist it will create player and add playtime
     takes JSON body:
         {
